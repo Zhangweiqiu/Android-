@@ -9,12 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                    android:label="登录">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ChatlistActivity"
+                    android:label="聊天">
+
+                <intent-filter>
+                    <action android:name="com.example.activitytest.ACTION_START"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <category android:name="com.example.activitytest.My_category"/>
+                </intent-filter>
         </activity>
     </application>
 

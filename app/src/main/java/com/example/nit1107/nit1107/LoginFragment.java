@@ -1,7 +1,7 @@
 package com.example.nit1107.nit1107;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +66,9 @@ public class LoginFragment extends Fragment {
                 else
                 {
                     Toast.makeText(getContext(),"账号或密码为空，请重新输入",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent("com.example.activitytest.ACTION_START");
+                    intent.addCategory("com.example.activitytest.My_category");
+                    startActivity(intent);
                 }
             }
         });
