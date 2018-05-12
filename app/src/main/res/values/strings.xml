@@ -12,6 +12,7 @@
     <string name="sign_up">注册</string>
     <string name="signin_link">已经有账号了？点击登录</string>
     <string name="reset_password">重制密码</string>
-    <string name="remember_password">Remember your password? Login</string>
+    <string name="remember_password">想起密码？点击登录</string>
     <string name="sign_title">注册</string>
+    <string name="new_password">请输入新的密码</string>
 </resources>

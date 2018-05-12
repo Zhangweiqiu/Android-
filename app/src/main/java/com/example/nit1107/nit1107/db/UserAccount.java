@@ -1,15 +1,9 @@
 package com.example.nit1107.nit1107.db;
 
 
+import org.litepal.crud.DataSupport;
 
-public class UserAccount {
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class UserAccount extends DataSupport{
 
     public String getAccount() {
         return account;
@@ -27,9 +21,16 @@ public class UserAccount {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 
-    private int id;
+    private String name;
     private String account;
     private String password;
 }

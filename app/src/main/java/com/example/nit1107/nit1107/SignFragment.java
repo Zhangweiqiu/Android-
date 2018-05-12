@@ -55,6 +55,13 @@ public class SignFragment extends Fragment {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).startLoginFragment();
+            }
+        });
+
 
         return view;
     }

@@ -66,9 +66,6 @@ public class LoginFragment extends Fragment {
                 else
                 {
                     Toast.makeText(getContext(),"账号或密码为空，请重新输入",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent("com.example.activitytest.ACTION_START");
-                    intent.addCategory("com.example.activitytest.My_category");
-                    startActivity(intent);
                 }
             }
         });

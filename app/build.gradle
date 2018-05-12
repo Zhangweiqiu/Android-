@@ -27,5 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     api 'com.android.support:design:26.1.0'
     api 'org.litepal.android:core:1.5.1'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
+    api 'de.hdodenhof:circleimageview:2.1.0'
+    api 'com.android.support:recyclerview-v7:26.1.0'
 }
