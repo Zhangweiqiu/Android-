@@ -4,6 +4,7 @@ package com.example.nit1107.nit1107;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,8 @@ public class ChatFragment extends AppCompatActivity {
         inputText =  findViewById(R.id.input_text);
         send =  findViewById(R.id.send);
         msgRecyclerView = findViewById(R.id.msg_recycler_view);
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        msgRecyclerView.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        msgRecyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MsgAdapter(msgList);
         msgRecyclerView.setAdapter(adapter);
         send.setOnClickListener(new View.OnClickListener() {
