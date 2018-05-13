@@ -28,6 +28,7 @@
                     <category android:name="com.example.activitytest.My_category"/>
                 </intent-filter>
         </activity>
+        <activity android:name=".ChatFragment"></activity>
     </application>
 
 </manifest>
