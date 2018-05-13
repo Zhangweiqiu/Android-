@@ -1,18 +1,19 @@
 package com.example.nit1107.nit1107;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
+import java.io.*;
+import java.net.Socket;
 
 import com.example.nit1107.nit1107.db.UserAccount;
 
 import org.litepal.crud.DataSupport;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private LoginFragment loginFragment;
     private SignFragment signFragment;
     private ForgotFragment forgotFragment;
+    private TextView show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +30,55 @@ public class MainActivity extends AppCompatActivity {
         loginFragment = new LoginFragment();
         signFragment = new SignFragment();
         forgotFragment = new ForgotFragment();
+        show = findViewById(R.id.myTitle);
         startLoginFragment();
 
+        new Thread()
+        {
+            @Override
+            public void run()
+            {
+                getServerInfo();
+
+            }
+        }.start();
     }
+    public void getServerInfo()
+    {
+
+        try {
+            Socket socket = new Socket("10.81.160.112", 30000);
+
+            //获取输出流 向服务端发送信息
+            OutputStream outputStream = socket.getOutputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            outputStream.write("我是客户端".getBytes("UTF-8"));
+            outputStream.flush();
+            outputStream.close();
+            //输入流 获取服务端对消息
+            socket.setSoTimeout(10000);
+            String line;
+            if((line= bufferedReader.readLine())!=null)
+            {
+                show.setText(line);
+            }
+
+            outputStream.close();
+
+            bufferedReader.close();
+            socket.close();
+        } catch (UnknownHostException e)
+        {
+            Log.d("UnknownHost","来自服务器的数据");
+            e.printStackTrace();
+        } catch (IOException e) {
+            Log.d("IOE","来自服务器的数据");
+
+            e.printStackTrace();
+        }
+    }
+
 
     //初使到登录界面
     public void startLoginFragment() {
@@ -94,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
                 userAccount.setPassword(password);
                 userAccount.save();
                 Toast.makeText(MainActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-
                 startLoginFragment();
             }
 
