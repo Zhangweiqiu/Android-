@@ -31,6 +31,8 @@ import com.example.nit1107.nit1107.model.Friend;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.*;
+
 public class ChatlistActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -72,13 +74,31 @@ public class ChatlistActivity extends AppCompatActivity {
                 .setShapeColorResource(R.color.colorPrimary)
                 .setGravity(Gravity.TOP|Gravity.END)
                 .setHideOnSelect(false);
-        bottomNavigationBar.setMode(BottomNavigationBar.MODE_DEFAULT)
-                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT);
+        bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         bottomNavigationBar.setBarBackgroundColor(R.color.black);
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.logo,"联系人"))
                 .addItem(new BottomNavigationItem(R.drawable.logo,"新闻中心"))
                 .setFirstSelectedPosition(0)
                 .initialise();
+        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position) {
+              //  if (position)
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
+
+        //上端导航
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -115,13 +135,13 @@ public class ChatlistActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.backup:
-                Toast.makeText(this,"1",Toast.LENGTH_SHORT).show();
+                makeText(this,"1", LENGTH_SHORT).show();
                 break;
             case R.id.delete:
-                Toast.makeText(this,"2",Toast.LENGTH_SHORT).show();
+                makeText(this,"2", LENGTH_SHORT).show();
                 break;
             case R.id.settings:
-                Toast.makeText(this,"3",Toast.LENGTH_SHORT).show();
+                makeText(this,"3", LENGTH_SHORT).show();
                 break;
             default:
         }
@@ -132,17 +152,17 @@ public class ChatlistActivity extends AppCompatActivity {
 
     //初始化聊天列表
     private void initFriend(){
-        for (int i = 0 ; i < 2; i++) {
+        for (int i = 0 ; i < 7; i++) {
 
-            Friend friend1 = new Friend("张三", R.drawable.logo);
+            Friend friend1 = new Friend("张三", R.drawable.ic_menu);
             friendList.add(friend1);
-            Friend friend2 = new Friend("李四", R.drawable.logo);
+            Friend friend2 = new Friend("李四", R.drawable.ic_menu);
             friendList.add(friend2);
-            Friend friend3 = new Friend("王五", R.drawable.logo);
+            Friend friend3 = new Friend("王五", R.drawable.ic_menu);
             friendList.add(friend3);
-            Friend friend4 = new Friend("柳六", R.drawable.logo);
+            Friend friend4 = new Friend("柳六", R.drawable.ic_menu);
             friendList.add(friend4);
-            Friend friend5 = new Friend("延期", R.drawable.logo);
+            Friend friend5 = new Friend("延期", R.drawable.ic_menu);
             friendList.add(friend5);
         }
     }

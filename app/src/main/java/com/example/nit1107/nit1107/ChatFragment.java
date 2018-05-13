@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.nit1107.nit1107.Adapter.MsgAdapter;
 import com.example.nit1107.nit1107.model.Msg;
@@ -34,12 +36,19 @@ public class ChatFragment extends AppCompatActivity {
 
     private MsgAdapter adapter;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_chat_layout);
         initMsgs();
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar1);
+        toolbar.setTitle("");
+        TextView textView = findViewById(R.id.toolbar1_title);
+        textView.setText("刘恒");
+        setSupportActionBar(toolbar);
         inputText =  findViewById(R.id.input_text);
         send =  findViewById(R.id.send);
         msgRecyclerView = findViewById(R.id.msg_recycler_view);
