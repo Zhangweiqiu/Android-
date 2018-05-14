@@ -1,11 +1,15 @@
 package com.example.nit1107.nit1107;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +21,12 @@ import android.widget.Toolbar;
 import com.example.nit1107.nit1107.Adapter.MsgAdapter;
 import com.example.nit1107.nit1107.model.Msg;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +48,24 @@ public class ChatFragment extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    String inputString;
+
+    public static Socket socket;
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler()
+    {
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+                    sendMessages(inputString,0);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -60,15 +88,90 @@ public class ChatFragment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = inputText.getText().toString();
-                if (!"".equals(content)){
-                    Msg msg = new Msg(content,Msg.TYPE_SENT);
-                    msgList.add(msg);
-                    adapter.notifyItemInserted(msgList.size() - 1); //当有新消息时，刷新RecyclerView中的显示
-                    msgRecyclerView.scrollToPosition(msgList.size() - 1); //将RecyclerView定位到最后一行
-                    inputText.setText("");   //清空输入框中的内容
-                }
+                sendMessages(content,1);
+                send(content);
             }
         });
+
+
+        //建立服务器连接
+//        conn();
+        get();
+    }
+
+    private void sendMessages(String content,int type)
+    {
+        if (!"".equals(content)){
+            Msg msg = new Msg(content,type);
+            msgList.add(msg);
+            adapter.notifyItemInserted(msgList.size() - 1); //当有新消息时，刷新RecyclerView中的显示
+            msgRecyclerView.scrollToPosition(msgList.size() - 1); //将RecyclerView定位到最后一行
+            inputText.setText("");   //清空输入框中的内容
+        }
+    }
+    public static void conn()
+    {
+        new Thread()
+        {
+            @Override
+            public void run()
+            {
+                try{
+                    socket = new Socket("10.81.228.255",9999);
+                    Log.e("JAVA","建立连接  " + socket);
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+
+    public void send( final String info) {
+        new Thread() {
+            @Override
+            public void run() {
+
+                try {
+                    OutputStream outputStream = socket.getOutputStream();
+                    outputStream.write((info+"\n").getBytes("UTF-8"));
+
+                    System.out.println("发送消息");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    public void get() {
+        new Thread() {
+            @Override
+            public void run() {
+
+
+                try {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                    socket.setSoTimeout(10000);
+                    while (true)
+                    {
+                        inputString = bufferedReader.readLine();
+                        if(inputString!=null)
+                        {
+                            Message message = new Message();
+
+                            message.what =1;
+                            handler.sendMessage(message);
+                        }
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     private void initMsgs(){

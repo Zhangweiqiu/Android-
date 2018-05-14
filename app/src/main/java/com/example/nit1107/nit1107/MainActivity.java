@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             OutputStream outputStream = socket.getOutputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            outputStream.write("我是客户端".getBytes("UTF-8"));
+//            Log.d("server",bufferedReader.readLine());
+            outputStream.write("我是客户端\n".getBytes("UTF-8"));
             outputStream.flush();
             outputStream.close();
             //输入流 获取服务端对消息

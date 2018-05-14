@@ -51,6 +51,7 @@ public class ChatlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatlist);
 
+        ChatFragment.conn();
         //初始化
         initFriend();
         ChatListAdapter adapter = new ChatListAdapter(ChatlistActivity.this,R.layout.head_item,friendList);
