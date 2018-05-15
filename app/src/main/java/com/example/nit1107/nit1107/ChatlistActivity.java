@@ -49,6 +49,8 @@ public class ChatlistActivity extends AppCompatActivity {
 
     private  Toolbar toolbar;
 
+    private NewsFragment newsFragment;
+
     public static List<Friend> friendList = new ArrayList<>();
 
 
@@ -58,6 +60,7 @@ public class ChatlistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatlist);
 
         chatListFragment = new ChatListFragment();
+        newsFragment = new NewsFragment();
 
         ChatFragment.conn();
         //初始化
@@ -98,6 +101,10 @@ public class ChatlistActivity extends AppCompatActivity {
                     case 1:
                         toolbar.setTitle("每天新");
                         setSupportActionBar(toolbar);
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.chat_fragment_container, newsFragment)
+                                .commit();
                 }
             }
 
