@@ -47,6 +47,8 @@ public class ChatlistActivity extends AppCompatActivity {
 
     private ChatFragment chatFragment;
 
+    private  Toolbar toolbar;
+
     public static List<Friend> friendList = new ArrayList<>();
 
 
@@ -63,6 +65,12 @@ public class ChatlistActivity extends AppCompatActivity {
 
         startChatListFragment();
 
+        //上端导航
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("NIT_CHAT");
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
         //底部菜单栏
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
         textBadgeItem = new TextBadgeItem()
@@ -74,7 +82,7 @@ public class ChatlistActivity extends AppCompatActivity {
                 .setHideOnSelect(false);
         bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        bottomNavigationBar.setBarBackgroundColor(R.color.black);
+        bottomNavigationBar.setBarBackgroundColor("#FFFFFF");
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.logo,"联系人"))
                 .addItem(new BottomNavigationItem(R.drawable.logo,"新闻中心"))
                 .setFirstSelectedPosition(0)
@@ -82,7 +90,15 @@ public class ChatlistActivity extends AppCompatActivity {
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
-              //  if (position)
+                switch (position){
+                    case 0:
+                        toolbar.setTitle("NIT_CHAT");
+                        setSupportActionBar(toolbar);
+                        startChatListFragment();
+                    case 1:
+                        toolbar.setTitle("每天新");
+                        setSupportActionBar(toolbar);
+                }
             }
 
             @Override
@@ -96,10 +112,7 @@ public class ChatlistActivity extends AppCompatActivity {
             }
         });
 
-        //上端导航
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawerLayout = findViewById(R.id.drawer_layout);
+
 
         //右滑菜单
         NavigationView navigationView = findViewById(R.id.nav_view);

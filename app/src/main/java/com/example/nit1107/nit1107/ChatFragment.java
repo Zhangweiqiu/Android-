@@ -120,7 +120,7 @@ public class ChatFragment extends AppCompatActivity {
             public void run()
             {
                 try{
-                    socket = new Socket("10.81.160.112",9999);
+                    socket = new Socket("123.207.120.119",9999);
                     Log.e("JAVA","建立连接  " + socket);
                 } catch (UnknownHostException e) {
                     e.printStackTrace();

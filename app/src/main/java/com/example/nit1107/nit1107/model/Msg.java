@@ -11,6 +11,25 @@ public class Msg {
 
     private int type;
 
+    private String ToName;
+
+    private String FromName;
+
+    public String getToName() {
+        return ToName;
+    }
+
+    public void setToName(String toName) {
+        ToName = toName;
+    }
+
+    public String getFromName() {
+        return FromName;
+    }
+
+    public void setFromName(String fromName) {
+        FromName = fromName;
+    }
 
     public Msg(String content, int type) {
         this.content = content;
