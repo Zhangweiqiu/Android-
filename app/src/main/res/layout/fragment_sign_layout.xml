@@ -29,7 +29,7 @@
             android:layout_height="150dp"
             android:layout_below="@+id/title"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginTop="17dp"
             app:srcCompat="@drawable/chat" />
 
         <android.support.design.widget.TextInputLayout

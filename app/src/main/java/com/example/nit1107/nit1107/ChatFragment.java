@@ -30,9 +30,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by qiuzhangwi on 2018/5/13.
- */
+
 
 public class ChatFragment extends AppCompatActivity {
 
@@ -60,6 +58,7 @@ public class ChatFragment extends AppCompatActivity {
             {
                 case 1:
                     sendMessages(inputString,0);
+                    Log.d("Nit-message", inputString);
                     break;
                 default:
                     break;
@@ -96,7 +95,9 @@ public class ChatFragment extends AppCompatActivity {
 
         //建立服务器连接
 //        conn();
+
         get();
+        Log.d("-0-", "onCreate: chat");
     }
 
     private void sendMessages(String content,int type)
@@ -107,6 +108,8 @@ public class ChatFragment extends AppCompatActivity {
             adapter.notifyItemInserted(msgList.size() - 1); //当有新消息时，刷新RecyclerView中的显示
             msgRecyclerView.scrollToPosition(msgList.size() - 1); //将RecyclerView定位到最后一行
             inputText.setText("");   //清空输入框中的内容
+            Log.d("Nit-sucess", "update-sucess");
+
         }
     }
     public static void conn()
@@ -117,7 +120,7 @@ public class ChatFragment extends AppCompatActivity {
             public void run()
             {
                 try{
-                    socket = new Socket("10.81.228.255",9999);
+                    socket = new Socket("10.81.160.112",9999);
                     Log.e("JAVA","建立连接  " + socket);
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
@@ -158,8 +161,11 @@ public class ChatFragment extends AppCompatActivity {
                     while (true)
                     {
                         inputString = bufferedReader.readLine();
+                        Log.d("get-0-", inputString);
+
                         if(inputString!=null)
                         {
+                            Log.d("Nit-get", "input != null");
                             Message message = new Message();
 
                             message.what =1;
@@ -181,6 +187,16 @@ public class ChatFragment extends AppCompatActivity {
         msgList.add(msg2);
         Msg msg3 = new Msg("This is Tom .Nice talking to you",Msg.TyPE_RECEIVED);
         msgList.add(msg3);
+    }
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        Log.d("OnResume", "onResume: ");
+        adapter = new MsgAdapter(msgList);
+        msgRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
 }

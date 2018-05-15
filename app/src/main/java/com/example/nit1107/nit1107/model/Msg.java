@@ -1,8 +1,6 @@
 package com.example.nit1107.nit1107.model;
 
-/**
- * Created by qiuzhangwi on 2018/5/13.
- */
+
 public class Msg {
 
     public  static  final int TyPE_RECEIVED = 0;

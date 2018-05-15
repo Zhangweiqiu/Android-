@@ -1,5 +1,6 @@
 package com.example.nit1107.nit1107;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.gesture.GestureUtils;
 import android.support.annotation.NonNull;
@@ -38,33 +39,29 @@ public class ChatlistActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private BottomNavigationBar bottomNavigationBar;
 
+    private android.support.v4.app.Fragment chatListFragment;
+
     private TextBadgeItem textBadgeItem;
 
     private ShapeBadgeItem shapeBadgeItem;
 
     private ChatFragment chatFragment;
 
-    private List<Friend> friendList = new ArrayList<>();
+    public static List<Friend> friendList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatlist);
 
+        chatListFragment = new ChatListFragment();
+
         ChatFragment.conn();
         //初始化
         initFriend();
-        ChatListAdapter adapter = new ChatListAdapter(ChatlistActivity.this,R.layout.head_item,friendList);
-        ListView listView = findViewById(R.id.msg_list_view);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(ChatlistActivity.this,ChatFragment.class);
-                startActivity(intent);
-            }
-        });
 
+        startChatListFragment();
 
         //底部菜单栏
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
@@ -123,6 +120,13 @@ public class ChatlistActivity extends AppCompatActivity {
 
     }
 
+    public void startChatListFragment() {
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.chat_fragment_container, chatListFragment)
+                .commit();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar,menu);
@@ -152,7 +156,7 @@ public class ChatlistActivity extends AppCompatActivity {
 
 
     //初始化聊天列表
-    private void initFriend(){
+    public static void initFriend(){
         for (int i = 0 ; i < 7; i++) {
 
             Friend friend1 = new Friend("张三", R.drawable.ic_menu);

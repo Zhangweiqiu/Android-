@@ -33,15 +33,15 @@ public class MainActivity extends AppCompatActivity {
         show = findViewById(R.id.myTitle);
         startLoginFragment();
 
-        new Thread()
-        {
-            @Override
-            public void run()
-            {
-                getServerInfo();
-
-            }
-        }.start();
+//        new Thread()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                getServerInfo();
+//
+//            }
+//        }.start();
     }
     public void getServerInfo()
     {
