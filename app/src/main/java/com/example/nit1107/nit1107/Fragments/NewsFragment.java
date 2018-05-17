@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.nit1107.nit1107.NewsListFragment;
 import com.example.nit1107.nit1107.R;
 
 /**
@@ -39,9 +40,11 @@ public class NewsFragment extends Fragment{
 
         if (saveInstanceState == null) {
             mFragment1 = new NewsListFragment();
-            mFragment1.init();
+            mFragment1.init(0);
             mFragment2 = new NewsListFragment();
+            mFragment2.init(1);
             mFragment3 = new NewsListFragment();
+            mFragment3.init(2);
         }
 
         pagerAdapter = new PagerAdapter(getFragmentManager());

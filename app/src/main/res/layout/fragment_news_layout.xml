@@ -22,17 +22,17 @@
         <android.support.design.widget.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="a" />
+            android:text="社会新闻" />
 
         <android.support.design.widget.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="b" />
+            android:text="国内新闻" />
 
         <android.support.design.widget.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="c" />
+            android:text="国际新闻" />
 
     </android.support.design.widget.TabLayout>
 
