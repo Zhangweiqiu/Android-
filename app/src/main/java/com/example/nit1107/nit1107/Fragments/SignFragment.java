@@ -1,4 +1,4 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.nit1107.nit1107.Activity.MainActivity;
+import com.example.nit1107.nit1107.R;
 
 public class SignFragment extends Fragment {
 

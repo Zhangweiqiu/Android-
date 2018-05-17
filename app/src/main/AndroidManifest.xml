@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".Activity.MainActivity"
                     android:label="登录">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatlistActivity"
+        <activity android:name=".Activity.ChatlistActivity"
                     android:label="聊天">
 
                 <intent-filter>
@@ -28,7 +28,7 @@
                     <category android:name="com.example.activitytest.My_category"/>
                 </intent-filter>
         </activity>
-        <activity android:name=".ChatFragment"></activity>
+        <activity android:name=".Activity.ChatActivity"></activity>
     </application>
 
 </manifest>

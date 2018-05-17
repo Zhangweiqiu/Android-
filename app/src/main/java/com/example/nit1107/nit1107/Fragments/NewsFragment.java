@@ -1,17 +1,16 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
+
+import com.example.nit1107.nit1107.R;
 
 /**
  * Created by qiuzhangwi on 2018/5/16.

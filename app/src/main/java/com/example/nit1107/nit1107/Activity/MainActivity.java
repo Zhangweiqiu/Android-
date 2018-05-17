@@ -1,7 +1,6 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Activity;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,10 @@ import android.widget.Toast;
 import java.io.*;
 import java.net.Socket;
 
+import com.example.nit1107.nit1107.Fragments.ForgotFragment;
+import com.example.nit1107.nit1107.Fragments.SignFragment;
+import com.example.nit1107.nit1107.LoginFragment;
+import com.example.nit1107.nit1107.R;
 import com.example.nit1107.nit1107.db.UserAccount;
 
 import org.litepal.crud.DataSupport;
@@ -17,7 +20,7 @@ import org.litepal.crud.DataSupport;
 import java.net.UnknownHostException;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseAcitvity {
 
     private LoginFragment loginFragment;
     private SignFragment signFragment;

@@ -1,4 +1,4 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -16,6 +16,9 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
+import com.example.nit1107.nit1107.Fragments.ChatListFragment;
+import com.example.nit1107.nit1107.Fragments.NewsFragment;
+import com.example.nit1107.nit1107.R;
 import com.example.nit1107.nit1107.db.UserAccount;
 import com.example.nit1107.nit1107.model.Friend;
 
@@ -26,7 +29,7 @@ import java.util.List;
 
 import static android.widget.Toast.*;
 //TabLayout.OnTabSelectedListene
-public class ChatlistActivity extends AppCompatActivity {
+public class ChatlistActivity extends BaseAcitvity {
 
     private DrawerLayout drawerLayout;
     private BottomNavigationBar bottomNavigationBar;
@@ -37,7 +40,7 @@ public class ChatlistActivity extends AppCompatActivity {
 
     private ShapeBadgeItem shapeBadgeItem;
 
-    private ChatFragment chatFragment;
+    private ChatActivity chatFragment;
 
     private  Toolbar toolbar;
 
@@ -69,7 +72,7 @@ public class ChatlistActivity extends AppCompatActivity {
 
         chatListFragment = new ChatListFragment();
 
-        ChatFragment.conn();
+        ChatActivity.conn();
         //初始化
         initFriend();
 

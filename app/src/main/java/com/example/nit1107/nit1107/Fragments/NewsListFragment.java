@@ -1,4 +1,4 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Fragments;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nit1107.nit1107.R;
 import com.example.nit1107.nit1107.model.News;
 
 import java.util.ArrayList;
