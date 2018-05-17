@@ -19,6 +19,7 @@ import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.nit1107.nit1107.Fragments.ChatListFragment;
 import com.example.nit1107.nit1107.Fragments.NewsFragment;
 import com.example.nit1107.nit1107.R;
+import com.example.nit1107.nit1107.Server.ServerHelp;
 import com.example.nit1107.nit1107.db.UserAccount;
 import com.example.nit1107.nit1107.model.Friend;
 
@@ -72,7 +73,7 @@ public class ChatlistActivity extends BaseAcitvity {
 
         chatListFragment = new ChatListFragment();
 
-        ChatActivity.conn();
+        ServerHelp.conn();
         //初始化
         initFriend();
 

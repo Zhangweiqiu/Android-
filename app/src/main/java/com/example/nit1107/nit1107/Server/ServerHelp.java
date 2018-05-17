@@ -8,12 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 public  class ServerHelp {
-    public static ServerSocket serverSocket;
     public static Socket socket;
     public static InputStream inputStream;
     public static InputStreamReader inputStreamReader;
@@ -35,8 +33,8 @@ public  class ServerHelp {
             public void run()
             {
                 try{
-                    ServerHelp.socket = new Socket("10.81.228.255",9999);
-                    Log.e("JAVA","建立连接  " + ServerHelp.socket);
+                    socket = new Socket("10.81.160.112",9999);
+                    Log.e("JAVA","建立连接  " + socket);
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -59,7 +57,6 @@ public  class ServerHelp {
     }
 
     public static void closeSocket() throws IOException {
-        serverSocket.close();
         socket.close();
     }
 

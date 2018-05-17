@@ -147,9 +147,7 @@ public class ChatActivity extends BaseAcitvity {
                     String infos = jsonObject.toString();
                     ServerHelp.outputStream = ServerHelp.socket.getOutputStream();
                     ServerHelp.outputStream.write((infos+"\n").getBytes("UTF-8"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -167,6 +165,7 @@ public class ChatActivity extends BaseAcitvity {
 //                    socket.setSoTimeout(10000);
                     while (true)
                     {
+                        ServerHelp.InitInput();
                         inputString = ServerHelp.bufferedReader.readLine();
                         if(inputString!=null)
                         {
