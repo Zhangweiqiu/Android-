@@ -11,8 +11,16 @@ public class News {
     //新闻标题
     private String title;
 
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
+    }
+
     //新闻发布时间
-    private  String newsDate;
+    private  String des;
 
     //新闻图片URl地址
     private String newsImgUrl;
@@ -29,13 +37,6 @@ public class News {
         this.title = title;
     }
 
-    public String getNewsDate() {
-        return newsDate;
-    }
-
-    public void setNewsDate(String newsDate) {
-        this.newsDate = newsDate;
-    }
 
     public String getNewsImgUrl() {
         return newsImgUrl;

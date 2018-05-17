@@ -10,16 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.nit1107.nit1107.Adapter.MsgAdapter;
+import com.example.nit1107.nit1107.db.UserAccount;
 import com.example.nit1107.nit1107.model.Msg;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,6 +50,8 @@ public class ChatFragment extends AppCompatActivity {
     private Toolbar toolbar;
 
     String inputString;
+
+    private List<UserAccount> userAccounts = new ArrayList<>();
 
     public static Socket socket;
     @SuppressLint("HandlerLeak")
@@ -138,11 +143,19 @@ public class ChatFragment extends AppCompatActivity {
             public void run() {
 
                 try {
+
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("ToName",123);
+                    jsonObject.put("FromName",MainActivity.myCount);
+                    jsonObject.put("content",info);
+                    String infos = jsonObject.toString();
                     OutputStream outputStream = socket.getOutputStream();
-                    outputStream.write((info+"\n").getBytes("UTF-8"));
+                    outputStream.write((infos+"\n").getBytes("UTF-8"));
 
                     System.out.println("发送消息");
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -165,15 +178,24 @@ public class ChatFragment extends AppCompatActivity {
 
                         if(inputString!=null)
                         {
-                            Log.d("Nit-get", "input != null");
-                            Message message = new Message();
+                            JSONObject object = new JSONObject(inputString);
+                            String ToName = (String) object.get("ToName");
+                            String FromName = (String) object.get("FromName");
+                            inputString = (String) object.get("content");
+                            userAccounts = DataSupport.where("account = ?" ,FromName).find(UserAccount.class);
+                            if (MainActivity.myCount.equals(ToName)) {
+                                Log.d("Nit-get", "input != null");
+                                Message message = new Message();
 
-                            message.what =1;
-                            handler.sendMessage(message);
+                                message.what = 1;
+                                handler.sendMessage(message);
+                            }
                         }
                     }
 
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }

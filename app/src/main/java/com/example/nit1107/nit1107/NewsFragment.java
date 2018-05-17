@@ -1,37 +1,80 @@
 package com.example.nit1107.nit1107;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import com.example.nit1107.nit1107.Adapter.ChatListAdapter;
+import android.widget.TableLayout;
 
 /**
- * Created by qiuzhangwi on 2018/5/15.
+ * Created by qiuzhangwi on 2018/5/16.
  */
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment{
+
+    ViewPager viewPager;
+
+    NewsListFragment mFragment1;
+
+    NewsListFragment mFragment2;
+
+    NewsListFragment mFragment3;
+
+    PagerAdapter pagerAdapter;
+
+    private TabLayout tabLayout;
 
     public View onCreateView(LayoutInflater inflater , ViewGroup container, Bundle saveInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_news_layout,container ,false);
+        viewPager = view.findViewById(R.id.view_pager);
+        viewPager.setOffscreenPageLimit(2);
+        tabLayout = view.findViewById(R.id.toolbar_tab);
 
-        TabLayout tabLayout = view.findViewById(R.id.tablayout);
-        tabLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 60));
-        //tab可滚动
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        //tab居中显示
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        for (int i = 1;i < 3 ;i++){
-            tabLayout.addTab(tabLayout.newTab().setText("刘恒"));
+        if (saveInstanceState == null) {
+            mFragment1 = new NewsListFragment();
+            mFragment1.init();
+            mFragment2 = new NewsListFragment();
+            mFragment3 = new NewsListFragment();
         }
+
+        pagerAdapter = new PagerAdapter(getFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         return view;
     }
+
+    public class PagerAdapter extends FragmentPagerAdapter {
+        public PagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                return mFragment1;
+            } else if (position == 1) {
+                return mFragment2;
+            }else if (position == 2) {
+                return mFragment3;
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+    }
+
 }

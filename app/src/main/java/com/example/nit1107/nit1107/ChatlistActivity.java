@@ -1,45 +1,37 @@
 package com.example.nit1107.nit1107;
 
-import android.app.Fragment;
-import android.content.Intent;
-import android.gesture.GestureUtils;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.AndroidException;
-import android.view.DragAndDropPermissions;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
-import com.example.nit1107.nit1107.Adapter.ChatListAdapter;
+import com.example.nit1107.nit1107.db.UserAccount;
 import com.example.nit1107.nit1107.model.Friend;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.widget.Toast.*;
 
+import static android.widget.Toast.*;
+//TabLayout.OnTabSelectedListene
 public class ChatlistActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private BottomNavigationBar bottomNavigationBar;
 
-    private android.support.v4.app.Fragment chatListFragment;
+    private ChatListFragment chatListFragment;
 
     private TextBadgeItem textBadgeItem;
 
@@ -49,9 +41,25 @@ public class ChatlistActivity extends AppCompatActivity {
 
     private  Toolbar toolbar;
 
-    private NewsFragment newsFragment;
+    private NewsFragment newsFragment = new NewsFragment();;
 
     public static List<Friend> friendList = new ArrayList<>();
+
+    private List<UserAccount> userAccounts = new ArrayList<>();
+
+
+//    //新闻
+//    private TabLayout tabLayout;
+//
+//    private ViewPager viewPager;
+//
+//    private List<String> contents = new ArrayList<>();
+//
+//    private List<Fragment> fragments = new ArrayList<>();
+//
+//    private ViewPagerAdapter adapter;
+
+
 
 
     @Override
@@ -60,7 +68,6 @@ public class ChatlistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chatlist);
 
         chatListFragment = new ChatListFragment();
-        newsFragment = new NewsFragment();
 
         ChatFragment.conn();
         //初始化
@@ -95,22 +102,33 @@ public class ChatlistActivity extends AppCompatActivity {
             public void onTabSelected(int position) {
                 switch (position){
                     case 0:
+                        chatListFragment = new ChatListFragment();
                         toolbar.setTitle("NIT_CHAT");
                         setSupportActionBar(toolbar);
+                     //   newsFragment = new NewsFragment();
                         startChatListFragment();
                     case 1:
+                        toolbar.setTitle("每天新");
+                        setSupportActionBar(toolbar);
+                        chatListFragment = new ChatListFragment();
+
+                }
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+                    if (position == 0 ){
                         toolbar.setTitle("每天新");
                         setSupportActionBar(toolbar);
                         getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.chat_fragment_container, newsFragment)
                                 .commit();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-
+                    }else {
+                        toolbar.setTitle("NIT_CHAT");
+                        setSupportActionBar(toolbar);
+                        startChatListFragment();
+                   }
             }
 
             @Override
@@ -118,8 +136,6 @@ public class ChatlistActivity extends AppCompatActivity {
 
             }
         });
-
-
 
         //右滑菜单
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -175,6 +191,7 @@ public class ChatlistActivity extends AppCompatActivity {
     }
 
 
+
     //初始化聊天列表
     public static void initFriend(){
         for (int i = 0 ; i < 7; i++) {
@@ -191,6 +208,8 @@ public class ChatlistActivity extends AppCompatActivity {
             friendList.add(friend5);
         }
     }
+
+
 }
 
 

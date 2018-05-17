@@ -1,6 +1,7 @@
 package com.example.nit1107.nit1107;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private ForgotFragment forgotFragment;
     private TextView show;
 
+    public static  String myCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         {
             if(account.equals(userAccount.getAccount() )&& password.equals(userAccount.getPassword()))
             {
+                myCount = account;
                 GoChatActivity();
                 isgo =true;
                 break;
