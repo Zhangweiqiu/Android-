@@ -11,6 +11,8 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -24,9 +26,13 @@ import com.example.nit1107.nit1107.db.UserAccount;
 import com.example.nit1107.nit1107.model.Friend;
 
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.widget.Toast.*;
 //TabLayout.OnTabSelectedListene
@@ -50,21 +56,6 @@ public class ChatlistActivity extends BaseAcitvity {
     public static List<Friend> friendList = new ArrayList<>();
 
     private List<UserAccount> userAccounts = new ArrayList<>();
-
-
-//    //新闻
-//    private TabLayout tabLayout;
-//
-//    private ViewPager viewPager;
-//
-//    private List<String> contents = new ArrayList<>();
-//
-//    private List<Fragment> fragments = new ArrayList<>();
-//
-//    private ViewPagerAdapter adapter;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,8 +132,18 @@ public class ChatlistActivity extends BaseAcitvity {
             }
         });
 
+        //个人基本信息
+        List<UserAccount> userAccounts = DataSupport.where("account = ?" ,MainActivity.myCount).find(UserAccount.class);
+        UserAccount userAccount = userAccounts.get(0);
         //右滑菜单
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View view = navigationView.inflateHeaderView(R.layout.nav_header);//headerLayout
+        CircleImageView circleImageView = view.findViewById(R.id.icon_image);
+        circleImageView.setImageResource(R.drawable.chat);
+        TextView textView = view.findViewById(R.id.mail);
+        textView.setText(userAccount.getAccount());
+        TextView textView1 = view.findViewById(R.id.username);
+        textView1.setText(userAccount.getName());
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -198,6 +199,8 @@ public class ChatlistActivity extends BaseAcitvity {
 
     //初始化聊天列表
     public static void initFriend(){
+
+
         for (int i = 0 ; i < 7; i++) {
 
             Friend friend1 = new Friend("张三", R.drawable.ic_menu);

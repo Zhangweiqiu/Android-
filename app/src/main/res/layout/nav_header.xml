@@ -10,14 +10,12 @@
         android:id="@+id/icon_image"
         android:layout_width="70px"
         android:layout_height="70px"
-        android:src="@drawable/logo"
         android:layout_centerInParent="true"/>
     <TextView
         android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="171873861@mail.com"
         android:textColor="#fff"
         android:textSize="14sp"/>
     <TextView
@@ -25,7 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/mail"
-        android:text="Tony Green"
         android:textColor="#FFF"
         android:textSize="14sp"/>
 
