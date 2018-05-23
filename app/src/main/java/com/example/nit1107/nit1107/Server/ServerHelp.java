@@ -30,6 +30,8 @@ public  class ServerHelp {
     private static BufferedReader bufferedReader;
     private static OutputStream outputStream;
 
+    private final static String IP = "10.81.162.67";
+
     private static String ReceiveInfo;
     @SuppressLint("HandlerLeak")
     public Handler handler = new Handler()
@@ -62,7 +64,7 @@ public  class ServerHelp {
             public void run()
             {
                 try{
-                    socket = new Socket("172.20.10.3",9999);
+                    socket = new Socket("10.81.162.67",9999);
                     Log.e("JAVA","建立连接  " + socket);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -72,19 +74,25 @@ public  class ServerHelp {
     }
 
     public static void send( final String info) {
+        new Thread() {
+            @Override
+            public void run() {
 
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName", "刘恒");
-                    jsonObject.put("FromName", "邱张伟");
+                    jsonObject.put("ToName", "邱张伟");
+                    jsonObject.put("FromName", "刘恒");
                     jsonObject.put("content",info);
                     String infos = jsonObject.toString();
-                    ServerHelp.outputStream = ServerHelp.socket.getOutputStream();
-                    ServerHelp.outputStream.write((infos+"\n").getBytes("UTF-8"));
-                    ServerHelp.outputStream.flush();
+                    outputStream = socket.getOutputStream();
+                    outputStream.write((infos+"\n").getBytes("UTF-8"));
+                    outputStream.flush();
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
+            }
+        }.start();
+
     }
 
     public static void get() {
@@ -94,8 +102,8 @@ public  class ServerHelp {
 
 
                 try {
-                    socket = new Socket("172.20.10.3",9999);
-//                    socket.setSoTimeout(10000);
+                    socket = new Socket(IP,9999);
+                    socket.setSoTimeout(10000);
                     while (true)
                     {
                         ServerHelp.InitInput();
