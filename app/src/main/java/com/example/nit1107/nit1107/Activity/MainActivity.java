@@ -20,7 +20,7 @@ import org.litepal.crud.DataSupport;
 import java.net.UnknownHostException;
 import java.util.List;
 
-public class MainActivity extends BaseAcitvity {
+public class MainActivity extends AppCompatActivity {
 
     private LoginFragment loginFragment;
     private SignFragment signFragment;

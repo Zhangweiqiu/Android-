@@ -12,10 +12,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.nit1107.nit1107.Activity.ContentActivity;
 import com.example.nit1107.nit1107.Adapter.TitleAdapter;
 import com.example.nit1107.nit1107.gson.NewsList;
 import com.example.nit1107.nit1107.gson.Newss;
-import com.example.nit1107.nit1107.model.News;
 import com.example.nit1107.nit1107.model.Title;
 import com.example.nit1107.nit1107.util.HttpUtil;
 import com.example.nit1107.nit1107.util.Utility;
@@ -45,8 +45,6 @@ public class NewsListFragment extends Fragment{
     private TitleAdapter adapter;
 
     Context mContext;
-
-    private ArrayList<News> newsArrayList = new ArrayList<>();
 
 
     private List<Title> titleList = new ArrayList<>();

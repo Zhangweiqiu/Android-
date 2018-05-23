@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,14 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,39 +32,35 @@ import java.util.List;
 
 public class ChatActivity extends BaseAcitvity {
 
-
-
-
-
-
     private String friendName;
 
     private TextView title;
 
-    private List<Msg> msgList = new ArrayList<>();
+    private static List<Msg> msgList = new ArrayList<>();
 
-    private EditText inputText;
+    private static EditText inputText;
 
     private Button send;
 
-    private RecyclerView msgRecyclerView;
+    private static RecyclerView msgRecyclerView;
 
-    private MsgAdapter adapter;
+    private static MsgAdapter adapter;
 
     private Toolbar toolbar;
 
-    String inputString;
+    private static Message message;
+    private static String inputString;
 
     private List<UserAccount> userAccounts = new ArrayList<>();
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler()
+    public Handler handler = new Handler()
     {
         public void handleMessage(Message msg)
         {
             switch (msg.what)
             {
                 case 1:
-                    sendMessages(inputString,0);
+                    ChatActivity.updateMessages(inputString,0);
                     Log.d("Nit-message", inputString);
                     break;
                 default:
@@ -90,7 +78,7 @@ public class ChatActivity extends BaseAcitvity {
         title = findViewById(R.id.friendName);
         title.setText(friendName);
 
-        initMsgs();
+//        initMsgs();
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar1);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -101,24 +89,25 @@ public class ChatActivity extends BaseAcitvity {
         msgRecyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MsgAdapter(msgList);
         msgRecyclerView.setAdapter(adapter);
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = inputText.getText().toString();
-                sendMessages(content,1);
-                send(content);
+                updateMessages(content,1);
+                ServerHelp.send(content);
             }
         });
-
+//        updateUI("nihao");
 
         //建立服务器连接
 //        conn();
 
-        get();
+//        get();
         Log.d("-0-", "onCreate: chat");
     }
 
-    private void sendMessages(String content,int type)
+    public static void updateMessages(String content,int type)
     {
         if (!"".equals(content)){
             Msg msg = new Msg(content,type);
@@ -133,66 +122,10 @@ public class ChatActivity extends BaseAcitvity {
 
 
 
-    public void send( final String info) {
-        new Thread() {
-            @Override
-            public void run() {
-
-                try {
-
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName",MainActivity.myCount);
-                    jsonObject.put("FromName", MainActivity.myCount);
-                    jsonObject.put("content",info);
-                    String infos = jsonObject.toString();
-                    ServerHelp.outputStream = ServerHelp.socket.getOutputStream();
-                    ServerHelp.outputStream.write((infos+"\n").getBytes("UTF-8"));
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
-
-    public void get() {
-        new Thread() {
-            @Override
-            public void run() {
 
 
-                try {
 
-//                    socket.setSoTimeout(10000);
-                    while (true)
-                    {
-                        ServerHelp.InitInput();
-                        inputString = ServerHelp.bufferedReader.readLine();
-                        if(inputString!=null)
-                        {
-                            Log.d("objecinfo", inputString);
-                            JSONObject object = new JSONObject(inputString);
-                            String ToName = (String) object.get("ToName");
-                            String FromName = (String) object.get("FromName");
-                            inputString = (String) object.get("content");
-                            userAccounts = DataSupport.where("account = ?" ,FromName).find(UserAccount.class);
-                            if (MainActivity.myCount.equals(ToName)) {
-                                Log.d("Nit-get", "input != null");
-                                Message message = new Message();
 
-                                message.what = 1;
-                                handler.sendMessage(message);
-                            }
-                        }
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
 
     private void initMsgs(){
         Msg msg1 = new Msg("Hello guy",Msg.TyPE_RECEIVED);
@@ -201,6 +134,15 @@ public class ChatActivity extends BaseAcitvity {
         msgList.add(msg2);
         Msg msg3 = new Msg("This is Tom .Nice talking to you",Msg.TyPE_RECEIVED);
         msgList.add(msg3);
+    }
+
+    @Override
+    public void updateUI(String info)
+    {
+        inputString = info;
+        message = new Message();
+        message.what = 1;
+        handler.sendMessage(message);
     }
 
     @Override
@@ -214,16 +156,16 @@ public class ChatActivity extends BaseAcitvity {
     }
 
 
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-        try {
-            ServerHelp.closeInputStream();
-            ServerHelp.closeOutputStream();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void onDestroy()
+//    {
+//        super.onDestroy();
+//        try {
+//            ServerHelp.closeInputStream();
+//            ServerHelp.closeOutputStream();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

@@ -17,11 +17,12 @@ import com.example.nit1107.nit1107.model.Friend;
 
 
 public class ChatListFragment extends Fragment{
+    public static ListView listView;
     public View onCreateView(LayoutInflater inflater , ViewGroup container, Bundle saveInstanceState)
     {
         View view = inflater.inflate(R.layout.chatlist_layout,container ,false);
         ChatListAdapter adapter = new ChatListAdapter(getContext(),R.layout.head_item, ChatlistActivity.friendList);
-        ListView listView = view.findViewById(R.id.msg_list_view);
+        listView = view.findViewById(R.id.msg_list_view);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

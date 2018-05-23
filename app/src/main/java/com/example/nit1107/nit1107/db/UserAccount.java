@@ -48,4 +48,5 @@ public class UserAccount extends DataSupport{
     private List<String> friendNameList;
 
 
+
 }

@@ -29,7 +29,7 @@
                 </intent-filter>
         </activity>
         <activity android:name=".Activity.ChatActivity"></activity>
-        <activity android:name=".ContentActivity"></activity>
+        <activity android:name=".Activity.ContentActivity"></activity>
     </application>
 
 </manifest>

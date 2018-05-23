@@ -1,4 +1,4 @@
-package com.example.nit1107.nit1107;
+package com.example.nit1107.nit1107.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -8,11 +8,13 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.nit1107.nit1107.R;
+
 /**
  * Created by qiuzhangwi on 2018/5/17.
  */
 
-public class ContentActivity extends AppCompatActivity {
+public class ContentActivity extends BaseAcitvity {
 
     private WebView webView;
 
