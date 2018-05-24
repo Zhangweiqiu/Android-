@@ -38,13 +38,66 @@
                     <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="match_parent"-->
                     <!--android:layout_below="@+id/toolbar" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:paddingBottom="4dp"
+                    android:elevation="4dp">
+
+                    <com.example.nit1107.nit1107.QQNaviView
+                        android:id="@+id/qq_view_bubble"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onClick"
+                        android:gravity="center"
+                        app:bigIconSrc="@drawable/pre_bubble_big"
+                        app:smallIconSrc="@drawable/pre_bubble_small"
+                        app:iconWidth="@dimen/iconWeight"
+                        app:iconHeight="@dimen/iconHeight"
+                        app:range="1.2">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textSize"
+                            android:text="消息"/>
+
+                    </com.example.nit1107.nit1107.QQNaviView>
+
+
+                    <com.example.nit1107.nit1107.QQNaviView
+                        android:id="@+id/qq_view_star"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="onClick"
+                        app:bigIconSrc="@drawable/pre_star_big"
+                        app:smallIconSrc="@drawable/pre_star_small"
+                        app:iconWidth="@dimen/iconWeight"
+                        app:iconHeight="@dimen/iconHeight"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/textSize"
+                            android:text="看点"/>
+
+                    </com.example.nit1107.nit1107.QQNaviView>
+
+                </LinearLayout>
             </RelativeLayout>
 
-            <com.ashokvarma.bottomnavigation.BottomNavigationBar
-                android:id="@+id/bottom_navigation_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom" />
+            <!--<com.ashokvarma.bottomnavigation.BottomNavigationBar-->
+                <!--android:id="@+id/bottom_navigation_bar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="bottom" />-->
         </FrameLayout>
 
         <android.support.design.widget.NavigationView

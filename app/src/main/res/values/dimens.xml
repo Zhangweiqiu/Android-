@@ -2,4 +2,11 @@
 <resources>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_margin">32dp</dimen>
+    <dimen name="iconWeight">40dp</dimen>
+    <dimen name="iconHeight">40dp</dimen>
+    <dimen name="imageWeight">60dp</dimen>
+    <dimen name="imageHeight">60dp</dimen>
+    <dimen name="textSize">10sp</dimen>
+
+
 </resources>

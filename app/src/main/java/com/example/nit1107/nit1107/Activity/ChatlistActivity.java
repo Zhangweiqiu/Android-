@@ -20,6 +20,7 @@ import com.ashokvarma.bottomnavigation.ShapeBadgeItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
 import com.example.nit1107.nit1107.Fragments.ChatListFragment;
 import com.example.nit1107.nit1107.Fragments.NewsFragment;
+import com.example.nit1107.nit1107.QQNaviView;
 import com.example.nit1107.nit1107.R;
 import com.example.nit1107.nit1107.Server.ServerHelp;
 import com.example.nit1107.nit1107.db.UserAccount;
@@ -57,6 +58,9 @@ public class ChatlistActivity extends BaseAcitvity {
 
     private List<UserAccount> userAccounts = new ArrayList<>();
 
+
+    private QQNaviView mBubbleView;
+    private QQNaviView mStarView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,62 +79,68 @@ public class ChatlistActivity extends BaseAcitvity {
         toolbar.setTitle("NIT_CHAT");
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
+        //新的底部菜单栏
+        mBubbleView = (QQNaviView) findViewById(R.id.qq_view_bubble);
+        mStarView = (QQNaviView) findViewById(R.id.qq_view_star);
+        mBubbleView.setBigIcon(R.drawable.bubble_big);
+        mBubbleView.setSmallIcon(R.drawable.bubble_small);
+
 
         //底部菜单栏
-        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
-        textBadgeItem = new TextBadgeItem()
-                .setBorderWidth(4)
-                .setBackgroundColorResource(R.color.colorAccent);
-        shapeBadgeItem = new ShapeBadgeItem()
-                .setShapeColorResource(R.color.colorPrimary)
-                .setGravity(Gravity.TOP|Gravity.END)
-                .setHideOnSelect(false);
-        bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
-                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        bottomNavigationBar.setBarBackgroundColor("#FFFFFF");
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.logo,"联系人"))
-                .addItem(new BottomNavigationItem(R.drawable.logo,"新闻中心"))
-                .setFirstSelectedPosition(0)
-                .initialise();
-        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position) {
-                switch (position){
-                    case 0:
-                        chatListFragment = new ChatListFragment();
-                        toolbar.setTitle("NIT_CHAT");
-                        setSupportActionBar(toolbar);
-                     //   newsFragment = new NewsFragment();
-                        startChatListFragment();
-                    case 1:
-                        toolbar.setTitle("每天新");
-                        setSupportActionBar(toolbar);
-                        chatListFragment = new ChatListFragment();
+//        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
+//        textBadgeItem = new TextBadgeItem()
+//                .setBorderWidth(4)
+//                .setBackgroundColorResource(R.color.colorAccent);
+//        shapeBadgeItem = new ShapeBadgeItem()
+//                .setShapeColorResource(R.color.colorPrimary)
+//                .setGravity(Gravity.TOP|Gravity.END)
+//                .setHideOnSelect(false);
+//        bottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED)
+//                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+//        bottomNavigationBar.setBarBackgroundColor("#FFFFFF");
+//        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.logo,"联系人"))
+//                .addItem(new BottomNavigationItem(R.drawable.logo,"新闻中心"))
+//                .setFirstSelectedPosition(0)
+//                .initialise();
+//        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(int position) {
+//                switch (position){
+//                    case 0:
+//                        chatListFragment = new ChatListFragment();
+//                        toolbar.setTitle("NIT_CHAT");
+//                        setSupportActionBar(toolbar);
+//                     //   newsFragment = new NewsFragment();
+//                        startChatListFragment();
+//                    case 1:
+//                        toolbar.setTitle("每天新");
+//                        setSupportActionBar(toolbar);
+//                        chatListFragment = new ChatListFragment();
+//
+//                }
+//            }
 
-                }
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-                    if (position == 0 ){
-                        toolbar.setTitle("每天新");
-                        setSupportActionBar(toolbar);
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.chat_fragment_container, newsFragment)
-                                .commit();
-                    }else {
-                        toolbar.setTitle("NIT_CHAT");
-                        setSupportActionBar(toolbar);
-                        startChatListFragment();
-                   }
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-
-            }
-        });
+//            @Override
+//            public void onTabUnselected(int position) {
+//                    if (position == 0 ){
+//                        toolbar.setTitle("每天新");
+//                        setSupportActionBar(toolbar);
+//                        getSupportFragmentManager()
+//                                .beginTransaction()
+//                                .replace(R.id.chat_fragment_container, newsFragment)
+//                                .commit();
+//                    }else {
+//                        toolbar.setTitle("NIT_CHAT");
+//                        setSupportActionBar(toolbar);
+//                        startChatListFragment();
+//                   }
+//            }
+//
+//            @Override
+//            public void onTabReselected(int position) {
+//
+//            }
+//        });
 
         //个人基本信息
         List<UserAccount> userAccounts = DataSupport.where("account = ?" ,MainActivity.myCount).find(UserAccount.class);
@@ -160,7 +170,44 @@ public class ChatlistActivity extends BaseAcitvity {
 
 
     }
+    public void onClick(View view){
+        resetIcon();
+        switch (view.getId()){
+            case R.id.qq_view_bubble:
+                mBubbleView.setBigIcon(R.drawable.bubble_big);
+                mBubbleView.setSmallIcon(R.drawable.bubble_small);
 
+                chatListFragment = new ChatListFragment();
+                toolbar.setTitle("NIT_CHAT");
+                setSupportActionBar(toolbar);
+                startChatListFragment();
+
+                break;
+            case R.id.qq_view_star:
+                mStarView.setBigIcon(R.drawable.star_big);
+                mStarView.setSmallIcon(R.drawable.star_small);
+
+                toolbar.setTitle("每天新");
+                setSupportActionBar(toolbar);
+                startNewsFragment();
+                break;
+        }
+    }
+    private void resetIcon() {
+        mBubbleView.setBigIcon(R.drawable.pre_bubble_big);
+        mBubbleView.setSmallIcon(R.drawable.pre_bubble_small);
+
+        mStarView.setBigIcon(R.drawable.pre_star_big);
+        mStarView.setSmallIcon(R.drawable.pre_star_small);
+    }
+
+    public void startNewsFragment()
+    {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.chat_fragment_container, newsFragment)
+                .commit();
+    }
     public void startChatListFragment() {
 
         getSupportFragmentManager()
