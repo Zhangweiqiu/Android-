@@ -200,19 +200,12 @@ public class ChatlistActivity extends BaseAcitvity {
     //初始化聊天列表
     public static void initFriend(){
 
-
-        for (int i = 0 ; i < 7; i++) {
-
-            Friend friend1 = new Friend("张三", R.drawable.ic_menu);
-            friendList.add(friend1);
-            Friend friend2 = new Friend("李四", R.drawable.ic_menu);
-            friendList.add(friend2);
-            Friend friend3 = new Friend("王五", R.drawable.ic_menu);
-            friendList.add(friend3);
-            Friend friend4 = new Friend("柳六", R.drawable.ic_menu);
-            friendList.add(friend4);
-            Friend friend5 = new Friend("延期", R.drawable.ic_menu);
-            friendList.add(friend5);
+        for (int i=0;i<15;i++){
+            Friend msgBean = new Friend();
+            msgBean.setName("张某某"+i);
+            msgBean.setContent("你好，在么？"+i);
+            msgBean.setTime("上午10:30");
+            friendList.add(msgBean);
         }
     }
 

@@ -10,4 +10,8 @@
     <color name="color_MinorTextColor">#FF888888</color>
     <color name="color_MainTextColor">#000000</color>
     <color name="thinkblue">#99CCFF</color>
+
+
+    <color name="top">#C7C7CD</color>
+    <color name="del">#FC3C39</color>
 </resources>

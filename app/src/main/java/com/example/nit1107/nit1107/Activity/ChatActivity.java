@@ -78,7 +78,7 @@ public class ChatActivity extends BaseAcitvity {
         title = findViewById(R.id.friendName);
         title.setText(friendName);
 
-//        initMsgs();
+
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar1);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);

@@ -30,7 +30,7 @@ public  class ServerHelp {
     private static BufferedReader bufferedReader;
     private static OutputStream outputStream;
 
-    private final static String IP = "10.81.162.67";
+    private final static String IP = "172.20.10.3";
 
     private static String ReceiveInfo;
     @SuppressLint("HandlerLeak")
@@ -64,7 +64,7 @@ public  class ServerHelp {
             public void run()
             {
                 try{
-                    socket = new Socket("10.81.162.67",9999);
+                    socket = new Socket("172.20.10.3",9999);
                     Log.e("JAVA","建立连接  " + socket);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -80,8 +80,8 @@ public  class ServerHelp {
 
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName", "邱张伟");
-                    jsonObject.put("FromName", "刘恒");
+                    jsonObject.put("ToName", "刘恒");
+                    jsonObject.put("FromName", "邱张伟");
                     jsonObject.put("content",info);
                     String infos = jsonObject.toString();
                     outputStream = socket.getOutputStream();
@@ -103,7 +103,6 @@ public  class ServerHelp {
 
                 try {
                     socket = new Socket(IP,9999);
-                    socket.setSoTimeout(10000);
                     while (true)
                     {
                         ServerHelp.InitInput();

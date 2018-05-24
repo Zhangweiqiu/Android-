@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,26 +20,62 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by qiuzhangwi on 2018/5/13.
  */
 
-public class ChatListAdapter extends ArrayAdapter<Friend> {
+public class ChatListAdapter extends BaseAdapter {
 
-    private int resourceId;
+    private Context context;
+    private List<Friend> data;
+    private LayoutInflater inflater;
 
-    public ChatListAdapter(Context context, int textViewResourceId, List<Friend> object){
-        super(context,textViewResourceId,object);
-        resourceId = textViewResourceId;
+    public ChatListAdapter(Context context, List<Friend> data) {
+        this.context = context;
+        this.data = data;
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public View getView(int position, View converView , ViewGroup parent){
-        Friend chat = getItem(position);  //获取当前项的聊天的实例
-        View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
-        CircleImageView chatImage = view.findViewById(R.id.chat_img);
-        TextView chatName = view.findViewById(R.id.chat_name);
-        TextView lastContent = view.findViewById(R.id.id_item_tv2);
-        chatImage.setImageResource(chat.getImgId());
-        chatName.setText(chat.getName());
-        lastContent.setText(chat.getName());
-
-        return view;
+    public int getCount() {
+        return data.size();
     }
+
+    @Override
+    public Object getItem(int position) {
+        return data.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holoder = null;
+        if (convertView==null){
+            convertView = inflater.inflate(R.layout.head_item,null);
+            holoder = new ViewHolder();
+            holoder.ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
+            holoder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+            holoder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+            holoder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
+            convertView.setTag(holoder);
+        }
+        else {
+            holoder = (ViewHolder) convertView.getTag();
+        }
+
+        Friend item = data.get(position);
+        holoder.tvName.setText(item.getName());
+        holoder.tvTime.setText(item.getTime());
+        holoder.tvContent.setText(item.getContent());
+        return convertView;
+    }
+
+    public class ViewHolder{
+        TextView tvName;
+        TextView tvContent;
+        TextView tvTime;
+        ImageView ivIcon;
+    }
+
+
 }

@@ -15,6 +15,16 @@ public class Msg {
 
     private String FromName;
 
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getToName() {
         return ToName;
     }

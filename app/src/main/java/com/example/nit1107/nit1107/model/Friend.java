@@ -6,13 +6,8 @@ package com.example.nit1107.nit1107.model;
 
 public class Friend {
     private String name;
-
-    private Integer imgId;
-
-    public Friend(String name, Integer imgId) {
-        this.name = name;
-        this.imgId = imgId;
-    }
+    private String content;
+    private String time;
 
     public String getName() {
         return name;
@@ -22,11 +17,19 @@ public class Friend {
         this.name = name;
     }
 
-    public Integer getImgId() {
-        return imgId;
+    public String getContent() {
+        return content;
     }
 
-    public void setImgId(Integer imgId) {
-        this.imgId = imgId;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
