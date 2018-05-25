@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/bg_4"
+    android:background="@drawable/bg_2"
     android:orientation="vertical"
     tools:context="com.example.nit1107.nit1107.LoginFragment">
 
@@ -135,7 +135,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="6dp"
-            android:textColor="@color/app_blue_color"
+            android:textColor="@color/white"
             android:text="@string/app_version"/>
     </RelativeLayout>
 

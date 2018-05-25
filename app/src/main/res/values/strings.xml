@@ -15,7 +15,7 @@
     <string name="remember_password">想起密码？点击登录</string>
     <string name="sign_title">注册</string>
     <string name="new_password">请输入新的密码</string>
-    <string name="app_version">nit1107 1.0</string>
+    <string name="app_version">作者：刘恒 邱张伟</string>
     <string name="digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
 
 </resources>

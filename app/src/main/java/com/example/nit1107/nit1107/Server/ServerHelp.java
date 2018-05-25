@@ -51,9 +51,8 @@ public  class ServerHelp {
     };
 
     private static void InitInput() throws IOException {
-        inputStream = socket.getInputStream();
-        inputStreamReader = new InputStreamReader(inputStream);
-        bufferedReader = new BufferedReader(inputStreamReader);
+
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     public static void conn()
@@ -89,6 +88,13 @@ public  class ServerHelp {
                     outputStream.flush();
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
+                }
+                finally {
+                    try {
+                        outputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }.start();
@@ -137,30 +143,17 @@ public  class ServerHelp {
 
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
+                }finally {
+                    try {
+                        socket.close();
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }.start();
     }
 
-
-    public static void closeInputStream() throws IOException {
-        inputStream.close();
-        inputStreamReader.close();
-        bufferedReader.close();
-
-    }
-
-    public static void closeOutputStream() throws IOException {
-        outputStream.close();
-    }
-
-    public static void closeSocket() throws IOException {
-        socket.close();
-    }
-
-    public static void closeAll() throws IOException {
-        closeSocket();
-        closeInputStream();
-        closeOutputStream();
-    }
 }
