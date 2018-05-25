@@ -18,11 +18,11 @@ import com.example.nit1107.nit1107.Activity.MainActivity;
 public class LoginFragment extends Fragment {
 
     private TextView signup;
-    private TextView forgotPassword;
+//    private TextView forgotPassword;
     private EditText account;
     private EditText password;
-    private ImageButton QQ;
-    private ImageButton WeChat;
+//    private ImageButton QQ;
+//    private ImageButton WeChat;
 
 
     private Button submit;
@@ -33,12 +33,12 @@ public class LoginFragment extends Fragment {
 
         //初始化各个需要使用对控件
         signup = (TextView) view.findViewById(R.id.signup);
-        forgotPassword = (TextView) view.findViewById(R.id.forgotPassword);
+//        forgotPassword = (TextView) view.findViewById(R.id.forgotPassword);
         account = (EditText) view.findViewById(R.id.account);
         password = (EditText) view.findViewById(R.id.password);
-        submit = (Button) view.findViewById(R.id.submit);
-        QQ = (ImageButton) view.findViewById(R.id.qq_login);
-        WeChat = (ImageButton) view.findViewById(R.id.weChat_login);
+        submit = (Button) view.findViewById(R.id.login_submit);
+//        QQ = (ImageButton) view.findViewById(R.id.qq_login);
+//        WeChat = (ImageButton) view.findViewById(R.id.weChat_login);
 
 
         //各个控件的点击事件
@@ -50,13 +50,13 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //进入忘记密码界面
-                ((MainActivity) getActivity()).startForgotFrament();
-            }
-        });
+//        forgotPassword.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //进入忘记密码界面
+//                ((MainActivity) getActivity()).startForgotFrament();
+//            }
+//        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

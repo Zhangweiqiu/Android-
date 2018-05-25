@@ -1,148 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/bg_2"
+    android:orientation="vertical"
     tools:context="com.example.nit1107.nit1107.LoginFragment">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="58dp"
+        android:src="@mipmap/nit"
+        app:sriv_left_bottom_corner_radius="20dp"
+        app:sriv_left_top_corner_radius="20dp"
+        app:sriv_right_bottom_corner_radius="20dp"
+        app:sriv_right_top_corner_radius="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/icon_user_account" />
+
+        <EditText
+            android:id="@+id/account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@null"
+            android:hint="@string/account_hint"
+            android:digits="@string/digits"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white_color"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/hint_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/icon_pass_word" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@null"
+            android:hint="@string/password_hint"
+            android:digits="@string/digits"
+            android:inputType="textPassword"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white_color"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/hint_color" />
+
+    <Button
+        android:id="@+id/login_submit"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="46dp"
+        android:gravity="center"
+        android:background="@drawable/login_nol_bg"
+        android:text="@string/signin"
+        android:textColor="#1A8ECB"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/signup_link"
+        android:textColor="@color/white_color"
+        android:textSize="14sp"/>
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="0.8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white_color" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:focusableInTouchMode="true">
+        android:layout_height="match_parent"
+        android:layout_marginTop="6dp">
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:textColor="#3a3a3a"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/nit" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/wrapper_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/logo"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textColorHint="#3a3a3a">
-
-            <EditText
-                android:id="@+id/account"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/account_hint"
-                android:inputType="textEmailAddress"
-                android:textColor="#3a3a3a"
-                android:textSize="15sp" />
-        </android.support.design.widget.TextInputLayout>
-
-        <FrameLayout
-            android:id="@+id/password_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/wrapper_account">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/wrapper_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="4dp"
-                android:textColorHint="#3a3a3a">
-
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/password_hint"
-                    android:inputType="textPassword"
-                    android:textColor="#3a3a3a"
-                    android:textSize="15sp" />
-            </android.support.design.widget.TextInputLayout>
-
-            <TextView
-                android:id="@+id/forgotPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:clickable="true"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="36dp"
-                android:layout_marginRight="36dp"
-                android:text="@string/forgot_password" />
-        </FrameLayout>
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_below="@+id/password_layout"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:background="@drawable/button"
-            android:text="@string/signin"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-
-        <LinearLayout
-            android:id="@+id/social_buttons"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_below="@id/submit"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-            <ImageButton
-                android:id="@+id/qq_login"
-                android:layout_width="150dp"
-                android:layout_height="45dp"
-                android:layout_weight=".5"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="0dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/by_qq" />
-
-            <ImageButton
-                android:id="@+id/weChat_login"
-                android:layout_width="150dp"
-                android:layout_height="45dp"
-                android:layout_weight=".5"
-                android:adjustViewBounds="false"
-                android:background="?android:attr/selectableItemBackground"
-                android:padding="0dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/by_wechat" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/social_buttons"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:gravity="center"
-            android:text="@string/signup_link"
-            android:textAllCaps="true"
-            android:textSize="15sp" />
-
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/app_blue_color"
+            android:text="@string/app_version"/>
     </RelativeLayout>
 
-</ScrollView>
+</LinearLayout>
