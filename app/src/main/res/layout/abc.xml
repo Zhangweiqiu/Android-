@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/interval_color"/>
+
+    <!--输入框-->
+    <LinearLayout
+        android:id="@+id/layout_input"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/white_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/iv_input_type"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:scaleType="center"
+            android:src="@mipmap/sound"/>
+
+        <EditText
+            android:id="@+id/et_chat_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_back_ground"
+            android:textCursorDrawable="@color/app_blue_color"
+            android:visibility="visible"/>
+
+        <com.ezreal.audiorecordbutton.AudioRecordButton
+            android:id="@+id/btn_audio_record"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/app_black_color"
+            android:textSize="18sp"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_expression"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="center"
+            android:src="@mipmap/expression"/>
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/more"
+            android:visibility="visible"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -10,9 +10,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -91,21 +93,26 @@ public class ChatActivity extends BaseAcitvity {
 
 
         inputText =  findViewById(R.id.input_text);
-        send =  findViewById(R.id.send);
         msgRecyclerView = findViewById(R.id.msg_recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         msgRecyclerView.setLayoutManager(linearLayoutManager);
         adapter = new MsgAdapter(msgList);
         msgRecyclerView.setAdapter(adapter);
 
-        send.setOnClickListener(new View.OnClickListener() {
+        inputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
             @Override
-            public void onClick(View v) {
-                String content = inputText.getText().toString();
-                updateMessages(content,1);
-                ServerHelp.send(content);
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    String content = inputText.getText().toString();
+                    updateMessages(content,1);
+                    ServerHelp.send(content);
+                }
+                return false;
             }
         });
+
+
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
