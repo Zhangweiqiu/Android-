@@ -8,6 +8,15 @@ public class Friend {
     private String name;
     private String content;
     private String time;
+    private int headImg;
+
+    public int getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(int headImg) {
+        this.headImg = headImg;
+    }
 
     public String getName() {
         return name;

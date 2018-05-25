@@ -2,16 +2,21 @@ package com.example.nit1107.nit1107.Activity;
 
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.nit1107.nit1107.Adapter.MsgAdapter;
@@ -75,13 +80,16 @@ public class ChatActivity extends BaseAcitvity {
         setContentView(R.layout.fragment_chat_layout);
 
         friendName = getIntent().getStringExtra("friendName");
-        title = findViewById(R.id.friendName);
-        title.setText(friendName);
+//        title = findViewById(R.id.friendName);
+//        title.setText(friendName);
 
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar1);
-        toolbar.setTitle("");
+        toolbar.setTitle(friendName);
+        toolbar.setSubtitle("对方正在输入...");
         setSupportActionBar(toolbar);
+
+
         inputText =  findViewById(R.id.input_text);
         send =  findViewById(R.id.send);
         msgRecyclerView = findViewById(R.id.msg_recycler_view);
@@ -98,6 +106,12 @@ public class ChatActivity extends BaseAcitvity {
                 ServerHelp.send(content);
             }
         });
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_back);
+        }
 //        updateUI("nihao");
 
         //建立服务器连接
@@ -136,6 +150,17 @@ public class ChatActivity extends BaseAcitvity {
         msgList.add(msg3);
     }
 
+    /**
+     * 该方法是用来加载菜单布局的
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //加载菜单文件
+        getMenuInflater().inflate(R.menu.toolbar1, menu);
+        return true;
+    }
     @Override
     public void updateUI(String info)
     {
@@ -156,16 +181,18 @@ public class ChatActivity extends BaseAcitvity {
     }
 
 
-//    @Override
-//    public void onDestroy()
-//    {
-//        super.onDestroy();
-//        try {
-//            ServerHelp.closeInputStream();
-//            ServerHelp.closeOutputStream();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_more:
+                Toast.makeText(ChatActivity.this,"Click More", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+        }
+        return true;
+    }
 
 }

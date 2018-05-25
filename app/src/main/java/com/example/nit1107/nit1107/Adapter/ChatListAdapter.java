@@ -53,7 +53,7 @@ public class ChatListAdapter extends BaseAdapter {
         if (convertView==null){
             convertView = inflater.inflate(R.layout.head_item,null);
             holoder = new ViewHolder();
-            holoder.ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
+            holoder.ivIcon = convertView.findViewById(R.id.iv_icon);
             holoder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
             holoder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
             holoder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
@@ -64,6 +64,7 @@ public class ChatListAdapter extends BaseAdapter {
         }
 
         Friend item = data.get(position);
+        holoder.ivIcon.setImageResource(item.getHeadImg());
         holoder.tvName.setText(item.getName());
         holoder.tvTime.setText(item.getTime());
         holoder.tvContent.setText(item.getContent());
@@ -74,7 +75,7 @@ public class ChatListAdapter extends BaseAdapter {
         TextView tvName;
         TextView tvContent;
         TextView tvTime;
-        ImageView ivIcon;
+        CircleImageView ivIcon;
     }
 
 

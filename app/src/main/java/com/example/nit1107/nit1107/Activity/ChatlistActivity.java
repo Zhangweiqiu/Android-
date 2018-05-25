@@ -71,7 +71,7 @@ public class ChatlistActivity extends BaseAcitvity {
 
         //上端导航
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("NIT_CHAT");
+        toolbar.setTitle("联系人");
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -118,7 +118,7 @@ public class ChatlistActivity extends BaseAcitvity {
                 mBubbleView.setSmallIcon(R.drawable.bubble_small);
 
                 chatListFragment = new ChatListFragment();
-                toolbar.setTitle("NIT_CHAT");
+                toolbar.setTitle("联系人");
                 setSupportActionBar(toolbar);
                 startChatListFragment();
 
@@ -192,6 +192,16 @@ public class ChatlistActivity extends BaseAcitvity {
             msgBean.setName("张某某"+i);
             msgBean.setContent("你好，在么？"+i);
             msgBean.setTime("上午10:30");
+            if (i%5 == 0)
+                msgBean.setHeadImg(R.drawable.head1);
+            else if (i%5 == 1)
+                msgBean.setHeadImg(R.drawable.head2);
+            else if (i%5 == 2)
+                msgBean.setHeadImg(R.drawable.head3);
+            else if (i%5 == 3)
+                msgBean.setHeadImg(R.drawable.head4);
+            else if (i%5 == 4)
+                msgBean.setHeadImg(R.drawable.head5);
             friendList.add(msgBean);
         }
     }
