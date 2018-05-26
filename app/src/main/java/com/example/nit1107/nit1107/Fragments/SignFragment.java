@@ -27,8 +27,6 @@ public class SignFragment extends Fragment {
     private Button submit;
     private TextView login;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater , ViewGroup container, Bundle saveInstanceState)
     {
@@ -40,8 +38,6 @@ public class SignFragment extends Fragment {
         confirmPassword = (EditText) view.findViewById(R.id.confirm_password);
         submit = (Button) view.findViewById(R.id.submit);
         login = (TextView) view.findViewById(R.id.login);
-
-
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

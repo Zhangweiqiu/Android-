@@ -30,7 +30,7 @@ public class BaseAcitvity extends AppCompatActivity {
         }
 
         myActivity = this;
-        Log.d("activityName", myActivity.getClass().getSimpleName());
+        Log.d("LogInfo", "当前的活动：" + myActivity.getClass().getSimpleName());
 
     }
 

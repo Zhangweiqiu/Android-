@@ -86,7 +86,6 @@ public class NewsListFragment extends Fragment{
             }
         });
         requestNew(0);
-
     }
 
     public void init(int it){
@@ -154,7 +153,6 @@ public class NewsListFragment extends Fragment{
         });
     }
 
-
     /**
      * 输入不同的类型选项，返回对应的 URL 链接
      */
@@ -165,11 +163,9 @@ public class NewsListFragment extends Fragment{
                 break;
             case Other.ITEM_COUNTY:
                 address = address.replaceAll("social","guonei");
-//                address="https://api.tianapi.com/guonei/?key=339a8b166f397f008236e596616a5f54&num=50&rand=1";
                 break;
             case Other.ITEM_INTERNATION:
                 address = address.replaceAll("social","world");
-//                address="https://api.tianapi.com/world/?key=339a8b166f397f008236e596616a5f54&num=50&rand=1";
                 break;
             default:
         }

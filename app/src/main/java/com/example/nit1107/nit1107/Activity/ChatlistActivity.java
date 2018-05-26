@@ -42,16 +42,11 @@ public class ChatlistActivity extends BaseAcitvity {
 
     private ChatListFragment chatListFragment;
 
-
-    private ChatActivity chatFragment;
-
     private  Toolbar toolbar;
 
     private NewsFragment newsFragment = new NewsFragment();;
 
     public static List<Friend> friendList = new ArrayList<>();
-
-    private List<UserAccount> userAccounts = new ArrayList<>();
 
 
     private QQNaviView mBubbleView;
@@ -82,7 +77,6 @@ public class ChatlistActivity extends BaseAcitvity {
         mBubbleView.setBigIcon(R.drawable.bubble_big);
         mBubbleView.setSmallIcon(R.drawable.bubble_small);
 
-
         //个人基本信息
         List<UserAccount> userAccounts = DataSupport.where("account = ?" ,MainActivity.myCount).find(UserAccount.class);
         UserAccount userAccount = userAccounts.get(0);
@@ -108,7 +102,6 @@ public class ChatlistActivity extends BaseAcitvity {
                 return true;
             }
         });
-
 
     }
     public void onClick(View view){

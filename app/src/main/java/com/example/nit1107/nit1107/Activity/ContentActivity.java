@@ -1,5 +1,6 @@
 package com.example.nit1107.nit1107.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +11,11 @@ import android.webkit.WebViewClient;
 
 import com.example.nit1107.nit1107.R;
 
-/**
- * Created by qiuzhangwi on 2018/5/17.
- */
-
 public class ContentActivity extends BaseAcitvity {
 
     private WebView webView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +37,6 @@ public class ContentActivity extends BaseAcitvity {
         actionBar.setTitle(title);
         webView.loadUrl(url);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

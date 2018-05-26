@@ -18,30 +18,16 @@ import java.net.Socket;
 
 public  class ServerHelp {
     private static Socket socket;
-    private static boolean beConnnected = false;
-    private static DataInputStream dataInputStream;
-    private static DataOutputStream dataOutputStream;
 
+    private static boolean beConnnected = false;
+
+    private static DataInputStream dataInputStream;
+
+    private static DataOutputStream dataOutputStream;
 
     private final static String IP = "123.207.120.119";
 
     private static String ReceiveInfo;
-    @SuppressLint("HandlerLeak")
-    public Handler handler = new Handler()
-    {
-        public void handleMessage(Message msg)
-        {
-            switch (msg.what)
-            {
-                case 1:
-                    ChatActivity.updateMessages(ReceiveInfo,0);
-                    Log.d("Nit-message", ReceiveInfo);
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
 
     public static void connect()
@@ -83,20 +69,14 @@ public  class ServerHelp {
                     ReceiveInfo = (String) object.get("content");
                     if(BaseAcitvity.Type == 1)
                     {
-                        Log.d("ReceiveInfo", "ChatlistActivity 在接受消息 ");
+                        Log.d("LogInfo", "ChatlistActivity 在接受消息 ");
                     }
                     else if(BaseAcitvity.Type == 2)
                     {
-                        Log.d("ReceiveInfo", "ChatActivity 在接受消息 ");
+                        Log.d("LogoInfo", "ChatActivity 在接受消息 ");
 
-//                                userAccounts = DataSupport.where("account = ?" ,FromName).find(UserAccount.class);
                         if ("邱张伟".equals(ToName)) {
-                            Log.d("Nit-get", "input != null");
-//                                    Message message = new Message();
-//                                    message.what = 1;
                             BaseAcitvity.myActivity.updateUI(ReceiveInfo);
-
-
                         }
                     }
                 }
@@ -110,19 +90,27 @@ public  class ServerHelp {
         }
     }
 
-
     public static void send( final String info) {
 
+        new Thread()
+        {
+            @Override
+            public void run()
+            {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("ToName", "刘恒");
                     jsonObject.put("FromName", "邱张伟");
                     jsonObject.put("content",info);
                     String infos = jsonObject.toString();
+                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeUTF(infos);
                     dataOutputStream.flush();
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
+        }.start();
+
+    }
 }

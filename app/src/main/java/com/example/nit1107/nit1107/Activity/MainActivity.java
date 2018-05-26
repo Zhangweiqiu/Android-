@@ -38,54 +38,7 @@ public class MainActivity extends AppCompatActivity {
         show = findViewById(R.id.myTitle);
         startLoginFragment();
 
-//        new Thread()
-//        {
-//            @Override
-//            public void run()
-//            {
-//                getServerInfo();
-//
-//            }
-//        }.start();
     }
-    public void getServerInfo()
-    {
-
-        try {
-            Socket socket = new Socket("10.81.160.112", 30000);
-
-            //获取输出流 向服务端发送信息
-            OutputStream outputStream = socket.getOutputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-//            Log.d("server",bufferedReader.readLine());
-            outputStream.write("我是客户端\n".getBytes("UTF-8"));
-            outputStream.flush();
-            outputStream.close();
-            //输入流 获取服务端对消息
-            socket.setSoTimeout(10000);
-            String line;
-            if((line= bufferedReader.readLine())!=null)
-            {
-                show.setText(line);
-            }
-
-            outputStream.close();
-
-            bufferedReader.close();
-            socket.close();
-        } catch (UnknownHostException e)
-        {
-            Log.d("UnknownHost","来自服务器的数据");
-            e.printStackTrace();
-        } catch (IOException e) {
-            Log.d("IOE","来自服务器的数据");
-
-            e.printStackTrace();
-        }
-    }
-
-
     //初使到登录界面
     public void startLoginFragment() {
 
@@ -100,16 +53,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, signFragment)
-                .commit();
-    }
-
-    //进入忘记密码界面
-
-    public void startForgotFrament()
-    {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, forgotFragment)
                 .commit();
     }
 
@@ -128,13 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
-
         if(!isgo)
         {
             Toast.makeText(MainActivity.this,"账号或密码输入错误，请重新输入",Toast.LENGTH_SHORT).show();
         }
     }
-
 
     //注册事件 进入登录界面
     public void OnSign(String name , String account , String password , String confirmPassword)
@@ -174,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
     public void GoChatActivity()
     {
