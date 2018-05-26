@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,9 +29,9 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
 
         TextView rightMsg;
 
-        ImageView leftImg;
+        de.hdodenhof.circleimageview.CircleImageView leftImg;
 
-        ImageView rightImg;
+        de.hdodenhof.circleimageview.CircleImageView rightImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +63,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             holder.rightLayout.setVisibility(View.GONE);
             holder.rightImg.setVisibility(View.GONE);
             holder.leftMsg.setText(msg.getContent());
+            holder.leftImg.setImageResource(R.drawable.head3);
         }else if (msg.getType() == Msg.TYPE_SENT){
             //如果发送的消息，则显示右边的消息布局，将左边的消息布局隐藏
             holder.rightLayout.setVisibility(View.VISIBLE);
@@ -71,6 +71,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             holder.leftLayout.setVisibility(View.GONE);
             holder.leftImg.setVisibility(View.GONE);
             holder.rightMsg.setText(msg.getContent());
+            holder.rightImg.setImageResource(R.drawable.head5);
         }
     }
 

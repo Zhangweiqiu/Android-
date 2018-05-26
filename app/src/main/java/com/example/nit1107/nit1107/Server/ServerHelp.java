@@ -8,22 +8,13 @@ import android.util.Log;
 
 import com.example.nit1107.nit1107.Activity.BaseAcitvity;
 import com.example.nit1107.nit1107.Activity.ChatActivity;
-import com.example.nit1107.nit1107.Activity.MainActivity;
-import com.example.nit1107.nit1107.db.UserAccount;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.litepal.crud.DataSupport;
-
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public  class ServerHelp {
     private static Socket socket;
@@ -32,7 +23,7 @@ public  class ServerHelp {
     private static DataOutputStream dataOutputStream;
 
 
-    private final static String IP = "172.20.10.3";
+    private final static String IP = "123.207.120.119";
 
     private static String ReceiveInfo;
     @SuppressLint("HandlerLeak")
@@ -55,15 +46,7 @@ public  class ServerHelp {
 
     public static void connect()
     {
-        try {
-            socket = new Socket(IP,9999);
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            new Thread(new ChatThread()).start();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+          new Thread(new ChatThread()).start();
 
     }
 
@@ -87,6 +70,9 @@ public  class ServerHelp {
         {
 
             try {
+                socket = new Socket(IP,9999);
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
                 beConnnected = true;
                 while (beConnnected)
                 {
@@ -104,7 +90,7 @@ public  class ServerHelp {
                         Log.d("ReceiveInfo", "ChatActivity 在接受消息 ");
 
 //                                userAccounts = DataSupport.where("account = ?" ,FromName).find(UserAccount.class);
-                        if ("刘恒".equals(ToName)) {
+                        if ("邱张伟".equals(ToName)) {
                             Log.d("Nit-get", "input != null");
 //                                    Message message = new Message();
 //                                    message.what = 1;
@@ -129,8 +115,8 @@ public  class ServerHelp {
 
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName", "邱张伟");
-                    jsonObject.put("FromName", "刘恒");
+                    jsonObject.put("ToName", "刘恒");
+                    jsonObject.put("FromName", "邱张伟");
                     jsonObject.put("content",info);
                     String infos = jsonObject.toString();
                     dataOutputStream.writeUTF(infos);

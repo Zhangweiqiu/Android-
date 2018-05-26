@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/bg_2"
+    android:background="@drawable/bg_4"
     android:orientation="vertical"
     tools:context="com.example.nit1107.nit1107.LoginFragment">
 

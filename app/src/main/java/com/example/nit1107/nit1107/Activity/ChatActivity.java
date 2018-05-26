@@ -82,8 +82,6 @@ public class ChatActivity extends BaseAcitvity {
         setContentView(R.layout.fragment_chat_layout);
 
         friendName = getIntent().getStringExtra("friendName");
-//        title = findViewById(R.id.friendName);
-//        title.setText(friendName);
 
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -148,14 +146,6 @@ public class ChatActivity extends BaseAcitvity {
 
 
 
-    private void initMsgs(){
-        Msg msg1 = new Msg("Hello guy",Msg.TyPE_RECEIVED);
-        msgList.add(msg1);
-        Msg msg2 = new Msg("Hello,Who is that?",Msg.TYPE_SENT);
-        msgList.add(msg2);
-        Msg msg3 = new Msg("This is Tom .Nice talking to you",Msg.TyPE_RECEIVED);
-        msgList.add(msg3);
-    }
 
     /**
      * 该方法是用来加载菜单布局的

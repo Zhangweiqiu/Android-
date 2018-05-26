@@ -21,6 +21,8 @@
             android:textColor="@color/white"
             android:textSize="20sp"/>
     </android.support.v7.widget.Toolbar>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/msg_recycler_view"
         android:layout_width="match_parent"
