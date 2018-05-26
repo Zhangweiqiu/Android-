@@ -1,13 +1,8 @@
 package com.example.nit1107.nit1107.Server;
 
-
-import android.annotation.SuppressLint;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import com.example.nit1107.nit1107.Activity.BaseAcitvity;
-import com.example.nit1107.nit1107.Activity.ChatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,9 +68,9 @@ public  class ServerHelp {
                     }
                     else if(BaseAcitvity.Type == 2)
                     {
-                        Log.d("LogoInfo", "ChatActivity 在接受消息 ");
+                        Log.d("LogInfo", "ChatActivity 在接受消息 ");
 
-                        if ("邱张伟".equals(ToName)) {
+                        if ("刘恒".equals(ToName)) {
                             BaseAcitvity.myActivity.updateUI(ReceiveInfo);
                         }
                     }
@@ -99,10 +94,12 @@ public  class ServerHelp {
             {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName", "刘恒");
-                    jsonObject.put("FromName", "邱张伟");
+                    jsonObject.put("ToName", "邱张伟");
+                    jsonObject.put("FromName", "刘恒");
                     jsonObject.put("content",info);
                     String infos = jsonObject.toString();
+
+                    socket = new Socket(IP,9999);
                     dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeUTF(infos);
                     dataOutputStream.flush();

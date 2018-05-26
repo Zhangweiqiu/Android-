@@ -38,7 +38,9 @@ public class BaseAcitvity extends AppCompatActivity {
     protected void onDestroy()
     {
         super.onDestroy();
-        ServerHelp.disConnected();
+        Log.d("LogInfo", myActivity.getClass().getSimpleName() +"is be destroy ");
+        myActivity = null;
+//        ServerHelp.disConnected();
     }
 
 

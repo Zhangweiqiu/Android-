@@ -158,4 +158,10 @@ public class ChatActivity extends BaseAcitvity {
         return true;
     }
 
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        msgList.clear();
+    }
 }
