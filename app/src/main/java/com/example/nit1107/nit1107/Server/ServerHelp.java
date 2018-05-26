@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,10 +27,10 @@ import java.net.UnknownHostException;
 
 public  class ServerHelp {
     private static Socket socket;
-    private static InputStream inputStream;
-    private static InputStreamReader inputStreamReader;
-    private static BufferedReader bufferedReader;
-    private static OutputStream outputStream;
+    private static boolean beConnnected = false;
+    private static DataInputStream dataInputStream;
+    private static DataOutputStream dataOutputStream;
+
 
     private final static String IP = "172.20.10.3";
 
@@ -50,110 +52,91 @@ public  class ServerHelp {
         }
     };
 
-    private static void InitInput() throws IOException {
 
-        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    }
-
-    public static void conn()
+    public static void connect()
     {
-        new Thread()
+        try {
+            socket = new Socket(IP,9999);
+            dataInputStream = new DataInputStream(socket.getInputStream());
+            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            new Thread(new ChatThread()).start();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void disConnected()
+    {
+        beConnnected = false;
+
+        try {
+            dataInputStream.close();
+            dataOutputStream.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static class ChatThread implements Runnable{
+        @Override
+        public void run()
         {
-            @Override
-            public void run()
-            {
-                try{
-                    socket = new Socket("172.20.10.3",9999);
-                    Log.e("JAVA","建立连接  " + socket);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-    }
 
-    public static void send( final String info) {
-        new Thread() {
-            @Override
-            public void run() {
-
-                try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ToName", "刘恒");
-                    jsonObject.put("FromName", "邱张伟");
-                    jsonObject.put("content",info);
-                    String infos = jsonObject.toString();
-                    outputStream = socket.getOutputStream();
-                    outputStream.write((infos+"\n").getBytes("UTF-8"));
-                    outputStream.flush();
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    try {
-                        outputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
-
-    }
-
-    public static void get() {
-        new Thread() {
-            @Override
-            public void run() {
-
-
-                try {
-                    socket = new Socket(IP,9999);
-                    while (true)
+            try {
+                beConnnected = true;
+                while (beConnnected)
+                {
+                    ReceiveInfo = dataInputStream.readUTF();
+                    JSONObject object = new JSONObject(ReceiveInfo);
+                    String ToName = (String) object.get("ToName");
+                    String FromName = (String) object.get("FromName");
+                    ReceiveInfo = (String) object.get("content");
+                    if(BaseAcitvity.Type == 1)
                     {
-                        ServerHelp.InitInput();
-
-                        if(( ReceiveInfo = ServerHelp.bufferedReader.readLine())!=null)
-                        {
-                            JSONObject object = new JSONObject(ReceiveInfo);
-                            String ToName = (String) object.get("ToName");
-                            String FromName = (String) object.get("FromName");
-                            ReceiveInfo = (String) object.get("content");
-                            if(BaseAcitvity.Type == 1)
-                            {
-                                Log.d("ReceiveInfo", "ChatlistActivity 在接受消息 ");
-                            }
-                            else if(BaseAcitvity.Type == 2)
-                            {
-                                Log.d("ReceiveInfo", "ChatActivity 在接受消息 ");
+                        Log.d("ReceiveInfo", "ChatlistActivity 在接受消息 ");
+                    }
+                    else if(BaseAcitvity.Type == 2)
+                    {
+                        Log.d("ReceiveInfo", "ChatActivity 在接受消息 ");
 
 //                                userAccounts = DataSupport.where("account = ?" ,FromName).find(UserAccount.class);
-                                if ("邱张伟".equals(ToName)) {
-                                    Log.d("Nit-get", "input != null");
+                        if ("刘恒".equals(ToName)) {
+                            Log.d("Nit-get", "input != null");
 //                                    Message message = new Message();
 //                                    message.what = 1;
-                                    BaseAcitvity.myActivity.updateUI(ReceiveInfo);
+                            BaseAcitvity.myActivity.updateUI(ReceiveInfo);
 
-
-                                }
-                            }
 
                         }
                     }
-
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }finally {
-                    try {
-                        socket.close();
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }.start();
+
+
+        }
     }
 
+
+    public static void send( final String info) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("ToName", "邱张伟");
+                    jsonObject.put("FromName", "刘恒");
+                    jsonObject.put("content",info);
+                    String infos = jsonObject.toString();
+                    dataOutputStream.writeUTF(infos);
+                    dataOutputStream.flush();
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 }

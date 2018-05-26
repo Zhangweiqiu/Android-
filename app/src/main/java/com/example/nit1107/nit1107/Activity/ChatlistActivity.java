@@ -63,7 +63,8 @@ public class ChatlistActivity extends BaseAcitvity {
 
         chatListFragment = new ChatListFragment();
 
-        ServerHelp.get();
+        //连接服务器
+        ServerHelp.connect();
         //初始化
         initFriend();
 

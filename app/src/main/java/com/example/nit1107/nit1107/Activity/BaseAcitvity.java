@@ -1,15 +1,14 @@
 package com.example.nit1107.nit1107.Activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.nit1107.nit1107.Server.ServerHelp;
 
-/**
- * Created by liuheng on 2018/5/17.
- */
 
+@SuppressLint("Registered")
 public class BaseAcitvity extends AppCompatActivity {
     public static int Type =0;
     public static BaseAcitvity myActivity;
@@ -33,6 +32,13 @@ public class BaseAcitvity extends AppCompatActivity {
         myActivity = this;
         Log.d("activityName", myActivity.getClass().getSimpleName());
 
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        ServerHelp.disConnected();
     }
 
 
