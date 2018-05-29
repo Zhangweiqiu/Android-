@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.nit1107.nit1107.NewsListFragment;
 import com.example.nit1107.nit1107.R;
 
 /**

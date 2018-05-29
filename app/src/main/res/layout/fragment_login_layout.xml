@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/bg_4"
     android:orientation="vertical"
-    tools:context="com.example.nit1107.nit1107.LoginFragment">
+    tools:context="com.example.nit1107.nit1107.Fragments.LoginFragment">
 
     <com.joooonho.SelectableRoundedImageView
         android:id="@+id/imageView"

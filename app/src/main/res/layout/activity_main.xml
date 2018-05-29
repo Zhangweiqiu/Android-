@@ -27,7 +27,7 @@
     <!--android:layout_height="match_parent">-->
     <!--<fragment-->
         <!--android:id="@+id/myFragment"-->
-        <!--android:name="com.example.nit1107.nit1107.LoginFragment"-->
+        <!--android:nacom.example.nit1107.nit1107.Fragments.LoginFragmentment"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"/>-->
 <!--</FrameLayout>-->

@@ -3,12 +3,10 @@ package com.example.nit1107.nit1107.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.nit1107.nit1107.Fragments.ForgotFragment;
 import com.example.nit1107.nit1107.Fragments.SignFragment;
-import com.example.nit1107.nit1107.LoginFragment;
+import com.example.nit1107.nit1107.Fragments.LoginFragment;
 import com.example.nit1107.nit1107.R;
 import com.example.nit1107.nit1107.db.UserAccount;
 
